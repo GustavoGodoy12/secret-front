@@ -24,7 +24,7 @@ import {
   BackBtn,
   NextBtn,
   Footer,
-} from './styles'
+} from '../../styles/register.styles'
 
 import bgSrc from '@/assets/profilewallpaper1.png'
 import { FaUserPlus, FaEnvelope, FaPhoneAlt, FaStore, FaLock } from 'react-icons/fa'

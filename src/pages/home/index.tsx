@@ -12,7 +12,7 @@ import { products } from '@/data/products'
 import { filterProducts } from '@/utils/FilterProducts'
 
 import { Geist, Geist_Mono } from 'next/font/google'
-import * as S from './home.styles'
+import * as S from '../../styles/home.styles'
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
 const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] })

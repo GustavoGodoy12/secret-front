@@ -15,7 +15,7 @@ import {
   SmallRow,
   SmallPlaceholder,
   BottomPlaceholder,
-} from './styles'
+} from '../../../styles/home-images.styles'
 
 export default function ImagesPage() {
   const router = useRouter()

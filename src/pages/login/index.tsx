@@ -12,7 +12,7 @@ import {
   IconEyeOpen, IconEyeClosed, CheckboxRow, StyledCheckbox,
   PrimaryButton, TextButton, DividerRow, Divider, DividerLabel,
   ForgotLink, Footer,
-} from './styles'
+} from '../../styles/login.styles'
 
 import bgSrc from '@/assets/profilewallpaper1.png'
 import logoSrc from '@/assets/secret.png'

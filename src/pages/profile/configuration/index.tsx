@@ -17,7 +17,7 @@ import {
   TextInput,
   ActionButton,
   UnderlineLink,
-} from './configuration.styles'
+} from '../../../styles/configuration.styles'
 import euImage from '@/assets/eu.jpeg'
 
 export default function Configuration() {
