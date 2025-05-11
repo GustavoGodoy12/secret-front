@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { StyledButton } from '@/components/Button/styles'
 
 
-const red = '#B01E2D'
+
 const inputBg = '#202020'
 const gradient =
   'linear-gradient(180deg, rgba(25,25,25,0.9) 0%, rgba(10,10,10,0.85) 100%)'

@@ -1,10 +1,12 @@
+// src/pages/register/index.tsx
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type Dispatch, type SetStateAction } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+import type { IconType } from 'react-icons'
 import Button from '@/components/Button'
 import {
   Container,
@@ -27,26 +29,38 @@ import {
 import bgSrc from '@/assets/profilewallpaper1.png'
 import { FaUserPlus, FaEnvelope, FaPhoneAlt, FaStore, FaLock } from 'react-icons/fa'
 
+type Field = {
+  value: string
+  set: Dispatch<SetStateAction<string>>
+  placeholder: string
+  type?: string
+}
+
+type Step = {
+  icon: IconType
+  title: string
+  subtitle: string
+  fields: Field[]
+}
+
 export default function RegisterPage() {
   const router = useRouter()
-
 
   useEffect(() => {
     document.body.classList.add('login-page')
     return () => document.body.classList.remove('login-page')
   }, [])
 
-  
   const [step, setStep] = useState(0)
-  const [first, setFirst]   = useState('')
-  const [last,  setLast]    = useState('')
-  const [email, setEmail]   = useState('')
-  const [phone, setPhone]   = useState('')
-  const [code,  setCode]    = useState('')
-  const [pass,  setPass]    = useState('')
-  const [conf,  setConf]    = useState('')
+  const [first, setFirst] = useState('')
+  const [last, setLast] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [code, setCode] = useState('')
+  const [pass, setPass] = useState('')
+  const [conf, setConf] = useState('')
 
-  const STEPS = [
+  const STEPS: Step[] = [
     {
       icon: FaUserPlus,
       title: 'Crie uma conta',
@@ -54,7 +68,7 @@ export default function RegisterPage() {
         'Seja bem-vindo! Precisamos de algumas informações para efetuar o cadastro.',
       fields: [
         { value: first, set: setFirst, placeholder: 'Digite seu nome' },
-        { value: last,  set: setLast,  placeholder: 'Digite seu sobrenome' },
+        { value: last, set: setLast, placeholder: 'Digite seu sobrenome' },
       ],
     },
     {
@@ -62,7 +76,12 @@ export default function RegisterPage() {
       title: '',
       subtitle: 'Por favor, informe o seu e-mail corporativo.',
       fields: [
-        { value: email, set: setEmail, placeholder: 'Digite seu e-mail', type: 'email' },
+        {
+          value: email,
+          set: setEmail,
+          placeholder: 'Digite seu e-mail',
+          type: 'email',
+        },
       ],
     },
     {
@@ -70,7 +89,12 @@ export default function RegisterPage() {
       title: '',
       subtitle: 'Informe um telefone de contato.',
       fields: [
-        { value: phone, set: setPhone, placeholder: 'Digite seu telefone', type: 'tel' },
+        {
+          value: phone,
+          set: setPhone,
+          placeholder: 'Digite seu telefone',
+          type: 'tel',
+        },
       ],
     },
     {
@@ -86,26 +110,34 @@ export default function RegisterPage() {
       title: '',
       subtitle: 'Por fim, crie uma senha segura.',
       fields: [
-        { value: pass, set: setPass, placeholder: 'Senha', type: 'password' },
-        { value: conf, set: setConf, placeholder: 'Confirmar senha', type: 'password' },
+        {
+          value: pass,
+          set: setPass,
+          placeholder: 'Senha',
+          type: 'password',
+        },
+        {
+          value: conf,
+          set: setConf,
+          placeholder: 'Confirmar senha',
+          type: 'password',
+        },
       ],
     },
   ]
 
   const { icon: Icon, title, subtitle, fields } = STEPS[step]
 
-
   const next = () => setStep((s) => Math.min(s + 1, STEPS.length - 1))
 
   const handleBack = () => {
     if (step === 0) {
-      router.push('/login')            
+      router.push('/login')
     } else {
-      setStep(step - 1)                
+      setStep(step - 1)
     }
   }
 
-  
   return (
     <>
       <Head>
@@ -129,7 +161,7 @@ export default function RegisterPage() {
             {fields.map((f, i) => (
               <InputWrapper key={i}>
                 <StyledInput
-                  type={f.type || 'text'}
+                  type={f.type ?? 'text'}
                   value={f.value}
                   onChange={(e) => f.set(e.target.value)}
                   placeholder={f.placeholder}
@@ -137,14 +169,12 @@ export default function RegisterPage() {
               </InputWrapper>
             ))}
 
-  
             <DotsRow>
               {STEPS.map((_, i) => (
                 <Dot key={i} $active={i === step} />
               ))}
             </DotsRow>
 
-            
             <NavRow>
               <BackBtn as={Button} onClick={handleBack}>
                 {step === 0 ? 'Login' : 'Voltar'}
@@ -167,7 +197,8 @@ export default function RegisterPage() {
           Ao prosseguir você concorda com nossos{' '}
           <Link href="#" style={{ textDecoration: 'underline' }}>
             <strong>Termos e Políticas</strong>
-          </Link>.
+          </Link>
+          .
         </Footer>
       </Container>
     </>

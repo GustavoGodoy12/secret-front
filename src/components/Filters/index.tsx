@@ -13,12 +13,10 @@ import { FilterSection } from './FilterSection'
 import { CleanFiltersButton } from './CleanFiltersButton'
 import Button from '@/components/Button'
 
-
 import type { StaticImageData } from 'next/image'
 import calcaFilterImg   from '@/assets/calca-filter.png'
 import bermudaFilterImg from '@/assets/bermuda-filter1.png'
 import moletomFilterImg from '@/assets/moletom-filter.png'
-
 
 const CATEGORIES = ['Calças', 'Bermudas', 'Moletons']
 const CATEGORY_IMAGES: Record<string, StaticImageData> = {
@@ -51,7 +49,9 @@ export default function Filters({
   onApply,
   onClear,
 }: Props) {
-  const hasActive = categories.length || colors.length || sizes.length
+  // agora é booleano
+  const hasActive: boolean =
+    categories.length > 0 || colors.length > 0 || sizes.length > 0
 
   const Checkbox = ({
     checked,
@@ -70,14 +70,11 @@ export default function Filters({
 
   return (
     <Container>
-      
       <FiltersHeaderContainer>
         <h3>filtros</h3>
       </FiltersHeaderContainer>
 
-      
       <FiltersScroll>
-        
         <FilterSection title="Categoria" isActive>
           <CategoryGrid>
             {CATEGORIES.map((c) => {
@@ -103,7 +100,6 @@ export default function Filters({
           </CategoryGrid>
         </FilterSection>
 
-        
         <FilterSection title="Tamanho" isActive>
           {SIZES.map((s) => (
             <label key={s}>
@@ -116,7 +112,6 @@ export default function Filters({
           ))}
         </FilterSection>
 
-        
         <FilterSection title="Cor" isActive>
           {COLORS.map((c) => (
             <label key={c}>
@@ -130,7 +125,6 @@ export default function Filters({
         </FilterSection>
       </FiltersScroll>
 
-      
       <FooterButtons>
         <Button onClick={onApply}>Aplicar filtros</Button>
         <CleanFiltersButton

@@ -1,3 +1,4 @@
+// src/pages/home/images/index.tsx
 
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -16,61 +17,73 @@ import {
   BottomPlaceholder,
 } from './styles'
 
-
-const CATEGORIES = ['Calças', 'Bermudas', 'Moletons']
-const COLORS     = ['Preto', 'Branco', 'Azul', 'Verde', 'Vermelho']
-const SIZES      = ['PP', 'P', 'M', 'G', 'GG']
-
 export default function ImagesPage() {
   const router = useRouter()
-  const model  = (router.query.model as string) || 'produto'
+  const modelParam = router.query.model
+  const model =
+    Array.isArray(modelParam) && modelParam.length > 0
+      ? modelParam[0]
+      : typeof modelParam === 'string'
+      ? modelParam
+      : 'produto'
 
-
-  const [cats,   setCats]   = useState<string[]>([])
-  const [colors, setColors] = useState<string[]>([])
-  const [sizes,  setSizes]  = useState<string[]>([])
-
-  const [dCats,   setDCats]   = useState<string[]>([])
+  // seleção temporária de filtros
+  const [dCats, setDCats]   = useState<string[]>([])
   const [dColors, setDColors] = useState<string[]>([])
-  const [dSizes,  setDSizes]  = useState<string[]>([])
+  const [dSizes, setDSizes]   = useState<string[]>([])
 
   const toggle = (
     arr: string[],
     value: string,
     setter: (v: string[]) => void
-  ) => setter(arr.includes(value) ? arr.filter((v) => v !== value) : [...arr, value])
+  ) =>
+    setter(
+      arr.includes(value)
+        ? arr.filter((v) => v !== value)
+        : [...arr, value]
+    )
 
+  // neste placeholder, o "apply" só fecha/mantém a seleção
   const applyFilters = () => {
-    setCats(dCats)
-    setColors(dColors)
-    setSizes(dSizes)
+    // se quiser, adicionar lógica de fetch aqui...
   }
 
   const clearAll = () => {
-    setDCats([]); setDColors([]); setDSizes([])
-    setCats([]);  setColors([]);  setSizes([])
+    setDCats([])
+    setDColors([])
+    setDSizes([])
   }
-
 
   return (
     <Container>
       <ContentWrapper>
-       
-        <main style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-       
+        <main
+          style={{
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1rem',
+          }}
+        >
           <Breadcrumb>
             <Crumb>
-              <Link href="/home" aria-label="Ir para a Home">home</Link>
+              <Link href="/home" aria-label="Ir para a Home">
+                home
+              </Link>
             </Crumb>
-            <span>{'>'}</span>
+            <span>&gt;</span>
             <Crumb>
-              <Link href="/home" aria-label="Voltar para a lista de fotos">fotos dos produtos</Link>
+              <Link
+                href="/home"
+                aria-label="Voltar para a lista de fotos"
+              >
+                fotos dos produtos
+              </Link>
             </Crumb>
-            <span>{'>'}</span>
+            <span>&gt;</span>
             <Crumb bold>{model}</Crumb>
           </Breadcrumb>
 
-       
           <MainPlaceholder />
 
           <SmallRow>
@@ -86,7 +99,6 @@ export default function ImagesPage() {
           <BottomPlaceholder />
         </main>
 
-       
         <Filters
           categories={dCats}
           colors={dColors}
