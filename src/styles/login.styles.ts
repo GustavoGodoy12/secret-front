@@ -4,7 +4,7 @@ import { StyledButton } from '@/components/Button/styles'
 
 
 const red   = '#B01E2D'
-const gray1 = '#F0F2FF'
+
 const cardGradient =
   'linear-gradient(180deg, rgba(25,25,25,0.9) 0%, rgba(10,10,10,0.8) 100%)'
 
