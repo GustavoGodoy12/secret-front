@@ -101,10 +101,18 @@ export const StyledInput = styled.input`
   width: 100%;
   padding: 0.95rem 3rem 0.95rem 1rem;
   border-radius: 30px;
-  border: none;
-  outline: none;
-  background: ${gray1};
+  border: 1px solid #ccc;    /* borda padrão cinza */
+  background: #fff;           /* fundo branco */
+  color: #000;                /* texto preto */
   font-size: 0.95rem;
+
+  &::placeholder {
+    color: #666;              /* placeholder em cinza escuro */
+  }
+
+  &:focus {
+    outline: 2px solid #0070f3; /* foco azul, opcional */
+  }
 `
 
 export const IconCheck = styled(FaCheckCircle)<{ $ok: boolean }>`
