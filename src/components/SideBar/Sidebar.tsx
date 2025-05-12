@@ -18,6 +18,7 @@ import {
   IconFile,
   IconCog,
   IconSignOut,
+  IconLock,
   AvatarWrapper,
   Greeting,
   Divider,
@@ -35,19 +36,13 @@ export default function Sidebar() {
     pathname.startsWith('/profile') ? 'perfil' : 'menu'
   )
 
-
   useEffect(() => {
     setView(pathname.startsWith('/profile') ? 'perfil' : 'menu')
   }, [pathname])
 
-
   const handleLogout = async (e: React.MouseEvent) => {
-    e.preventDefault()                      
-
-
+    e.preventDefault()
     await fetch('/api/auth/logout')
-
-    
     router.push('/login')
   }
 
@@ -56,7 +51,6 @@ export default function Sidebar() {
       <LogoContainer>
         <Image src={logoSrc} alt="Logo" width={110} height={100} priority />
       </LogoContainer>
-
 
       <ToggleWrapper>
         <ToggleButton active={view === 'menu'} onClick={() => setView('menu')}>
@@ -71,7 +65,6 @@ export default function Sidebar() {
       </ToggleWrapper>
 
       {view === 'menu' ? (
-        
         <MenuList>
           <MenuItem>
             <StyledLink href="/home" active={pathname === '/home'}>
@@ -79,23 +72,25 @@ export default function Sidebar() {
             </StyledLink>
           </MenuItem>
           <MenuItem>
-            <StyledLink href="/showroom" active={pathname === '/showroom'}>
-              <IconCar /> Teste
+            <StyledLink href="#" disabled>
+              <IconCar /> Catálogos
+              <IconLock />
             </StyledLink>
           </MenuItem>
           <MenuItem>
-            <StyledLink href="/compartilhar" active={pathname === '/compartilhar'}>
-              <IconPlane /> Teste
+            <StyledLink href="#" disabled>
+              <IconPlane /> Referências
+              <IconLock />
             </StyledLink>
           </MenuItem>
           <MenuItem>
-            <StyledLink href="/campanhas" active={pathname === '/campanhas'}>
-              <IconBull /> Teste
+            <StyledLink href="#" disabled>
+              <IconBull /> Rede social
+              <IconLock />
             </StyledLink>
           </MenuItem>
         </MenuList>
       ) : (
-       
         <>
           <AvatarWrapper>
             <Image src={avatarSrc} alt="Avatar" width={100} height={100} />
@@ -105,24 +100,21 @@ export default function Sidebar() {
 
           <MenuList>
             <MenuItem>
-              <StyledLink
-                href="/profile/itens-salvos"
-                active={pathname === '/profile/itens-salvos'}
-              >
+              <StyledLink href="#" disabled>
                 <IconBookmark /> Itens Salvos
+                <IconLock />
               </StyledLink>
             </MenuItem>
             <MenuItem>
-              <StyledLink href="/profile/ajuda" active={pathname === '/profile/ajuda'}>
+              <StyledLink href="#" disabled>
                 <IconHelp /> Ajuda
+                <IconLock />
               </StyledLink>
             </MenuItem>
             <MenuItem>
-              <StyledLink
-                href="/profile/politicas"
-                active={pathname === '/profile/politicas'}
-              >
+              <StyledLink href="#" disabled>
                 <IconFile /> Políticas
+                <IconLock />
               </StyledLink>
             </MenuItem>
             <MenuItem>
@@ -139,12 +131,9 @@ export default function Sidebar() {
 
           <MenuList>
             <MenuItem>
-              <StyledLink
-                href="/login"
-                active={false}
-                onClick={handleLogout}
-              >
+              <StyledLink href="#" disabled onClick={handleLogout}>
                 <IconSignOut /> Sair
+                <IconLock />
               </StyledLink>
             </MenuItem>
           </MenuList>
